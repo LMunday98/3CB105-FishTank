@@ -10,6 +10,7 @@ from time import sleep
 #pumpController.pump_on()
 
 servo = ServoController()
+servo.beginServo()
 
 tempSensor = ReadTemp()
 tempSensor.begin_monitoring()
