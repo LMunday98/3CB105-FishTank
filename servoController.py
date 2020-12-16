@@ -1,28 +1,37 @@
-# Servo Control
+# Import libraries
 import RPi.GPIO as GPIO
 import time
 
 class ServoController():
 
     def __init__(self):
-        servoPIN = 14
-        self.servoDelay = 0.25
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(servoPIN, GPIO.OUT)
+        # Set GPIO numbering mode
+        GPIO.cleanup()
+        GPIO.setmode(GPIO.BOARD)
 
-        self.p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
-        self.p.start(7) # Initialization
+        # Set pin 11 as an output, and define as servo1 as PWM pin
+        GPIO.setup(11,GPIO.OUT)
+        self.servo1 = GPIO.PWM(11,50) # pin 11 for servo1, pulse 50Hz
+
+        # Start PWM running, with value of 0 (pulse off)
+        self.servo1.start(0)
+
+
 
     def beginServo(self):
-        #self.p.ChangeDutyCycle(5)
+        # Loop to allow user to set servo angle. Try/finally allows exit
+        # with execution of servo.stop and GPIO cleanup :)
+
         try:
             while True:
-                userInp = input("2.5 - 12.5:\n")
-                self.operateServo(userInp)
-        except KeyboardInterrupt:
-            p.stop()
-            GPIO.cleanup()
+                #Ask user for angle and turn servo to it
+                angle = float(input('Enter angle between 0 & 180: '))
+                self.servo1.ChangeDutyCycle(2+(angle/18))
+                time.sleep(0.1)
+                self.servo1.ChangeDutyCycle(0)
 
-    def operateServo(self, duration):
-          self.p.ChangeDutyCycle(duration)
-          time.sleep(self.servoDelay)
+        finally:
+            #Clean things up at the end
+            self.servo1.stop()
+            GPIO.cleanup()
+            print("Goodbye!")
