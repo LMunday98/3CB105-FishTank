@@ -6,7 +6,8 @@ class ServoController():
 
     def __init__(self):
         self.auto = True
-        self.delayTime = 3
+        self.repeat = False
+        self.delayTime = 1
 
         GPIO.cleanup()
         GPIO.setmode(GPIO.BOARD)
@@ -29,6 +30,9 @@ class ServoController():
                     time.sleep(0.01)
                     self.moveServo(0)
                     time.sleep(self.delayTime)
+
+                    if (self.repeat == False):
+                        break
                 else:
                     angle = float(input('Enter angle between 0 & 180: '))
                     self.moveServo(angle)
