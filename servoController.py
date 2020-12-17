@@ -44,11 +44,23 @@ class ServoController():
     def servoAuto(self):
         try:
             while True:
-                self.servo1.ChangeDutyCycle(self.calcMoveAngle(0))
+
+                self.servo1.ChangeDutyCycle(self.calcMoveAngle(180))
+                time.sleep(0.1)
+                self.servo1.ChangeDutyCycle(0)
+                time.sleep(0.1)
+
+                self.servo1.ChangeDutyCycle(self.calcMoveAngle(180))
                 time.sleep(0.1)
                 self.servo1.ChangeDutyCycle(0)
                 time.sleep(self.delayTime)
-                self.servo1.ChangeDutyCycle(self.calcMoveAngle(180))
+
+                self.servo1.ChangeDutyCycle(self.calcMoveAngle(0))
+                time.sleep(0.1)
+                self.servo1.ChangeDutyCycle(0)
+                time.sleep(0.1)
+
+                self.servo1.ChangeDutyCycle(self.calcMoveAngle(0))
                 time.sleep(0.1)
                 self.servo1.ChangeDutyCycle(0)
                 time.sleep(self.delayTime)
