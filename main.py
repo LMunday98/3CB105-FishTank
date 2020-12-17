@@ -35,9 +35,7 @@ def servoLoop():
             sleep(servo.delayTime)
     except Exception as e:
         print("error servo")
-    #finally:
-        #self.servo1.stop()
-        #GPIO.cleanup()
+
 
 # start multiprocessing
 

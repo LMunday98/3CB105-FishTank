@@ -5,6 +5,7 @@ import time
 class ServoController():
 
     def __init__(self):
+        self.dev = True
         self.auto = True
         self.repeat = True
         self.delayTime = 5
@@ -18,24 +19,29 @@ class ServoController():
     def beginServo(self):
         print("servo")
 
-        if (self.auto == True):
-            # flip
-            self.moveServo(180)
-            time.sleep(0.01)
-            self.moveServo(180)
-            time.sleep(1)
-
-            # reset
-            self.moveServo(0)
-            time.sleep(0.01)
-            self.moveServo(0)
-            time.sleep(0.01)
+        if (self.dev == True):
+            print("servo dev test")
         else:
-            angle = float(input('Enter angle between 0 & 180: '))
-            self.moveServo(angle)
-            time.sleep(0.1)
+            if (self.auto == True):
+                # flip
+                self.moveServo(180)
+                time.sleep(0.01)
+                self.moveServo(180)
+                time.sleep(1)
 
+                # reset
+                self.moveServo(0)
+                time.sleep(0.01)
+                self.moveServo(0)
+                time.sleep(0.01)
+            elif (self.auto == True):
+                angle = float(input('Enter angle between 0 & 180: '))
+                self.moveServo(angle)
+                time.sleep(0.1)
 
+    def finishServo(self):
+        self.servo1.stop()
+        GPIO.cleanup()
 
     def calcMoveAngle(self, angle):
         return (2+(angle/18))
