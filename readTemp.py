@@ -13,9 +13,9 @@ class ReadTemp():
         self.device_file = (device_folder + '/w1_slave')
 
     def begin_monitoring(self):
-        while True:
-        	print(self.read_temp())
-        	time.sleep(1)
+
+        print("temp")
+        print(self.read_temp())
 
     def read_temp_raw(self):
         f = open(self.device_file, 'r')
