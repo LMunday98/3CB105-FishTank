@@ -5,6 +5,7 @@ import time
 class TempController():
 
     def __init__(self, _process_paramaters):
+        print("Temp: create")
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
@@ -17,7 +18,7 @@ class TempController():
         self.device_file = (device_folder + '/w1_slave')
 
     def start(self):
-        print("Start: temp")
+        print("Temp: start")
         try:
             if (self.repeat == True):
                 while self.repeat:
@@ -35,6 +36,7 @@ class TempController():
         return lines
 
     def read_temp(self):
+        print("Temp: run")
         lines = self.read_temp_raw()
         while lines[0].strip()[-3:] != 'YES':
             time.sleep(0)
@@ -46,4 +48,5 @@ class TempController():
             return temp_c
 
     def finish(self):
+        print("Temp: finish")
         repeat = False

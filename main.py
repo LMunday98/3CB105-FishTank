@@ -10,13 +10,25 @@ from pumpController import PumpController
 from servoController import ServoController
 from threadController import ThreadController
 
+# defs
+
+def finishProgram():
+    if (repeat == True):
+        try:
+            input()
+        except Exception as e:
+            print("*Force Quit*")
+
+    thread_controller.finish_threads()
+    sys.exit()
+
 # program setup
 
 dev = False
-repeat = True
+repeat = False
 repeat_delay = 3
-
 process_paramaters = [dev, repeat, repeat_delay]
+
 # setup controllers
 
 servo = ServoController(process_paramaters)
@@ -35,12 +47,4 @@ thread_controller = ThreadController(controller_array, repeat)
 thread_controller.start()
 
 # finish and clean up processes
-
-if (repeat == True):
-    try:
-        input()
-    except Exception as e:
-        print("force quit")
-
-thread_controller.finish_threads()
-sys.exit()
+finishProgram()

@@ -29,8 +29,8 @@ class ThreadController():
                 self.create_thread(controller)
 
             # set daemon if repeat
-            print("Threading: daemon")
             if (self.repeat == True):
+                print("Threading: daemon")
                 for t in self.threads:
                     t.setDaemon(True)
 
@@ -38,6 +38,12 @@ class ThreadController():
             print("Threading: start")
             for t in self.threads:
                 t.start()
+
+            # join threads if not repeating
+            if (self.repeat == False):
+                print("Threading: join")
+                for t in self.threads:
+                    t.join()
 
         except Exception as e:
             print("Threading: error")

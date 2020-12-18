@@ -3,7 +3,7 @@ import os
 class PumpController():
 
     def __init__(self):
-        print("pump")
+        print("Pump: create")
 
     def pump_off(self):
         print("off")

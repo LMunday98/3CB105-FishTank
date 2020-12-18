@@ -5,6 +5,7 @@ import time
 class ServoController():
 
     def __init__(self, _process_paramaters):
+        print("Servo: create")
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
@@ -17,7 +18,7 @@ class ServoController():
         self.servo1.start(0)
 
     def start(self):
-        print("Start: servo")
+        print("Servo: start")
         try:
             if (self.repeat == True):
                 while self.repeat:
@@ -29,6 +30,7 @@ class ServoController():
             print("error servo")
 
     def runServo(self):
+        print("Servo: run")
         if (self.dev == True):
             print("servo dev movement")
         else:
@@ -45,6 +47,7 @@ class ServoController():
             time.sleep(0.01)
 
     def finish(self):
+        print("Servo: finish")
         self.repeat = False
         self.servo1.stop()
         GPIO.cleanup()
