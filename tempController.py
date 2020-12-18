@@ -2,7 +2,7 @@ import os
 import glob
 import time
 
-class ReadTemp():
+class TempController():
 
     def __init__(self, _dev, _repeat):
         self.dev = _dev
@@ -16,11 +16,12 @@ class ReadTemp():
         self.device_file = (device_folder + '/w1_slave')
 
     def start(self):
-        print("temp")
+        print("Start: temp")
         try:
             if (self.repeat == True):
-                print(self.read_temp())
-                time.sleep(1)
+                while self.repeat:
+                    print(self.read_temp())
+                    time.sleep(5)
             else:
                 print(self.read_temp())
 

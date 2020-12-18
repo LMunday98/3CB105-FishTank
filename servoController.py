@@ -7,20 +7,20 @@ class ServoController():
     def __init__(self, _dev, _repeat):
         self.dev = _dev
         self.repeat = _repeat
-        self.autoMove = True
-        self.delayTime = 5
+        self.manualServoControl = False
 
-        #GPIO.cleanup()
+        GPIO.setwarnings(False)
+        GPIO.cleanup()
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11,GPIO.OUT)
         self.servo1 = GPIO.PWM(11,50)
         self.servo1.start(0)
 
     def start(self):
-        print("servo")
+        print("Start: servo")
         try:
             if (self.repeat == True):
-                while True:
+                while self.repeat:
                     self.runServo()
                     time.sleep(5)
             else:
@@ -32,7 +32,11 @@ class ServoController():
         if (self.dev == True):
             print("servo dev movement")
         else:
-            if (self.autoMove == True):
+            if (self.manualServoControl == True):
+                angle = float(input('Enter angle between 0 & 180: '))
+                self.moveServo(angle)
+                time.sleep(0.1)
+            else:
                 # flip
                 self.moveServo(180)
                 time.sleep(0.01)
@@ -44,10 +48,6 @@ class ServoController():
                 time.sleep(0.01)
                 self.moveServo(0)
                 time.sleep(0.01)
-            elif (self.autoMove == False):
-                angle = float(input('Enter angle between 0 & 180: '))
-                self.moveServo(angle)
-                time.sleep(0.1)
 
     def finishServo(self):
         self.servo1.stop()
