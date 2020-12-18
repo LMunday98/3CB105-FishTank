@@ -28,15 +28,13 @@ def time_in_range(start, end, x):
     else:
         return start <= x or x <= end
 
-def tempT():
-    tempSensor.start()
+def create_thread(targetProcess):
+    threads.append(threading.Thread(target=start_process, args=(targetProcess,)))
 
-def servoT():
-    servo.start()
-
+def start_process(process):
+    process.start()
 
 # processing
-
 start = datetime.time(23, 0, 0)
 end = datetime.time(1, 0, 0)
 #print(time_in_range(start, end, datetime.time()))
@@ -45,29 +43,24 @@ end = datetime.time(1, 0, 0)
 
 try:
     # create threads
-
-    print("Theading: create")
-
-    thread_temperature = threading.Thread(target=tempT)
-    thread_servo = threading.Thread(target=servoT)
+    print("Threading: create")
+    threads = []
+    create_thread(tempSensor)
+    create_thread(servo)
 
     # set daemon if repeat
-
-    print("Theading: daemon")
-
+    print("Threading: daemon")
     if (repeat == True):
-        thread_temperature.setDaemon(True)
-        thread_servo.setDaemon(True)
+        for t in threads:
+            t.setDaemon(True)
 
     # start threads
-
-    print("Theading: start")
-
-    thread_temperature.start()
-    thread_servo.start()
+    print("Threading: start")
+    for t in threads:
+        t.start()
 
 except Exception as e:
-    print("error thread")
+    print("Threading: error")
 
 if (repeat == True):
     try:
