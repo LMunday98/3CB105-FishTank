@@ -6,15 +6,13 @@ from datetime import time
 
 class ServoController():
 
-    def __init__(self, _process_paramaters):
+    def __init__(self, _process_paramaters, _opTime):
         print("Servo: create")
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
         self.timeC = _process_paramaters[3]
-
-        self.operate_start_time = time(10,30)
-        self.operate_end_time = time(21,30)
+        self.opTime = _opTime
 
         GPIO.setwarnings(False)
         GPIO.cleanup()
@@ -36,7 +34,7 @@ class ServoController():
             print("Servo: error")
 
     def checkTime(self):
-        is_between_time = self.timeC.is_time_between(self.operate_start_time, self.operate_end_time)
+        is_between_time = self.timeC.is_time_between(self.opTime[0], self.opTime[1])
         if (is_between_time):
             self.runServo()
 

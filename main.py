@@ -2,6 +2,7 @@
 
 import sys
 import time
+from datetime import datetime, time
 
 from threadController import ThreadController
 from timeController import TimeController
@@ -27,8 +28,11 @@ repeat_delay = 3
 timeC = TimeController()
 process_paramaters = [dev, repeat, repeat_delay, timeC]
 
+# operation times
+servo_operation_times = [time(10,30), time(21,30)]
+
 # setup controllers
-servo = ServoController(process_paramaters)
+servo = ServoController(process_paramaters, servo_operation_times)
 tempSensor = TempController(process_paramaters)
 pumpController = PumpController()
 
