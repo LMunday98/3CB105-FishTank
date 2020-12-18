@@ -4,7 +4,10 @@ import time
 
 class ReadTemp():
 
-    def __init__(self):
+    def __init__(self, _dev, _repeat):
+        self.dev = _dev
+        self.repeat = _repeat
+
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
 
@@ -12,10 +15,17 @@ class ReadTemp():
         device_folder = glob.glob(base_dir + '28*')[0]
         self.device_file = (device_folder + '/w1_slave')
 
-    def begin_monitoring(self):
-
+    def start(self):
         print("temp")
-        print(self.read_temp())
+        try:
+            if (self.repeat == True):
+                print(self.read_temp())
+                time.sleep(1)
+            else:
+                print(self.read_temp())
+
+        except Exception as e:
+            print("error temp")
 
     def read_temp_raw(self):
         f = open(self.device_file, 'r')

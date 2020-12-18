@@ -4,13 +4,13 @@ import time
 
 class ServoController():
 
-    def __init__(self):
-        self.dev = True
+    def __init__(self, _dev, _repeat):
+        self.dev = _dev
+        self.repeat = _repeat
         self.autoMove = True
-        self.repeat = False
         self.delayTime = 5
 
-        GPIO.cleanup()
+        #GPIO.cleanup()
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11,GPIO.OUT)
         self.servo1 = GPIO.PWM(11,50)
@@ -18,13 +18,15 @@ class ServoController():
 
     def start(self):
         print("servo")
-
-        if (self.repeat == True):
-            while True:
+        try:
+            if (self.repeat == True):
+                while True:
+                    self.runServo()
+                    time.sleep(5)
+            else:
                 self.runServo()
-                time.sleep(5)
-        else:
-            self.runServo()
+        except Exception as e:
+            print("error servo")
 
     def runServo(self):
         if (self.dev == True):

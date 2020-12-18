@@ -1,8 +1,10 @@
 #sudo python Documents/3CB105-FishTank/main.py
 
 import sys
-import threading
 import time
+import threading
+
+import datetime
 
 from readTemp import ReadTemp
 from pumpController import PumpController
@@ -10,45 +12,44 @@ from servoController import ServoController
 
 # program setup
 
-servo = ServoController()
-tempSensor = ReadTemp()
+dev = False
+repeat = False
+
+servo = ServoController(dev, repeat)
+tempSensor = ReadTemp(dev, repeat)
 #pumpController = PumpController()
 
-# setup multiprocessing
+# defs
 
-def temperatureLoop():
-    try:
-        tempSensor.begin_monitoring()
-    except Exception as e:
-        print("error temp")
+def time_in_range(start, end, x):
+    """Return true if x is in the range [start, end]"""
+    if start <= end:
+        return start <= x <= end
+    else:
+        return start <= x or x <= end
 
-def servoLoop():
-    try:
-        servo.start()
-    except Exception as e:
-        print("error servo")
+# processing
+
+start = datetime.time(23, 0, 0)
+end = datetime.time(1, 0, 0)
+print(time_in_range(start, end, datetime.time()))
 
 # start multiprocessing
 
 try:
+    thread_temperature = threading.Thread(target=tempSensor.start())
+    thread_servo = threading.Thread(target=servo.start())
 
-    thread_temperature = threading.Thread(target=temperatureLoop)
-    #thread_temperature.setDaemon(True)
+    if (repeat == True):
+        thread_temperature.setDaemon(True)
+        thread_servo.setDaemon(True)
+
     thread_temperature.start()
-
-    thread_servo = threading.Thread(target=servoLoop)
-    thread_servo.setDaemon(True)
     thread_servo.start()
 
 except Exception as e:
     print("error thread")
 
-if (servo.repeat == True):
-    try:
-        input()
-        print("exit")
-
-    except Exception as e:
-        print("force exit")
+servo.finishServo()
 
 sys.exit()
