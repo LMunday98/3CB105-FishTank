@@ -9,6 +9,11 @@ class ThreadController():
         self.repeat = _repeat
         self.threads = []
 
+    def finish_threads(self):
+
+        for controller in self.controller_array:
+            controller.finish()
+
     def create_thread(self, targetProcess):
         self.threads.append(threading.Thread(target=self.start_process, args=(targetProcess,)))
 

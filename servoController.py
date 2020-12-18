@@ -4,10 +4,10 @@ import time
 
 class ServoController():
 
-    def __init__(self, _dev, _repeat, _repeat_delay):
-        self.dev = _dev
-        self.repeat = _repeat
-        self.repeat_delay = _repeat_delay
+    def __init__(self, _process_paramaters):
+        self.dev = _process_paramaters[0]
+        self.repeat = _process_paramaters[1]
+        self.repeat_delay = _process_paramaters[2]
 
         GPIO.setwarnings(False)
         GPIO.cleanup()
@@ -44,7 +44,8 @@ class ServoController():
             self.moveServo(0)
             time.sleep(0.01)
 
-    def finishServo(self):
+    def finish(self):
+        self.repeat = False
         self.servo1.stop()
         GPIO.cleanup()
 

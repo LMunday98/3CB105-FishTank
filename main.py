@@ -14,20 +14,27 @@ from threadController import ThreadController
 
 dev = False
 repeat = True
-repeat_delay = 1
+repeat_delay = 3
 
+process_paramaters = [dev, repeat, repeat_delay]
 # setup controllers
 
-servo = ServoController(dev, repeat, repeat_delay)
-tempSensor = TempController(dev, repeat, repeat_delay)
-#pumpController = PumpController()
+servo = ServoController(process_paramaters)
+tempSensor = TempController(process_paramaters)
+pumpController = PumpController()
+
+# add controllers to array
 
 controller_array = []
 controller_array.append(servo)
 controller_array.append(tempSensor)
 
+# setup threading
+
 thread_controller = ThreadController(controller_array, repeat)
 thread_controller.start()
+
+# finish and clean up processes
 
 if (repeat == True):
     try:
@@ -35,9 +42,5 @@ if (repeat == True):
     except Exception as e:
         print("force quit")
 
-    tempSensor.repeat = False
-    servo.repeat = False
-
-servo.finishServo()
-
+thread_controller.finish_threads()
 sys.exit()
