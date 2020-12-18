@@ -4,9 +4,10 @@ import time
 
 class TempController():
 
-    def __init__(self, _dev, _repeat):
+    def __init__(self, _dev, _repeat, _repeat_delay):
         self.dev = _dev
         self.repeat = _repeat
+        self.repeat_delay = _repeat_delay
 
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
@@ -21,10 +22,9 @@ class TempController():
             if (self.repeat == True):
                 while self.repeat:
                     print(self.read_temp())
-                    time.sleep(5)
+                    time.sleep(self.repeat_delay)
             else:
                 print(self.read_temp())
-
         except Exception as e:
             print("error temp")
 
@@ -43,5 +43,4 @@ class TempController():
         if equals_pos != -1:
             temp_string = lines[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
-            temp_f = temp_c * 9.0 / 5.0 + 32.0
-            return temp_c, temp_f
+            return temp_c

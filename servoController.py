@@ -4,9 +4,10 @@ import time
 
 class ServoController():
 
-    def __init__(self, _dev, _repeat):
+    def __init__(self, _dev, _repeat, _repeat_delay):
         self.dev = _dev
         self.repeat = _repeat
+        self.repeat_delay = _repeat_delay
 
         GPIO.setwarnings(False)
         GPIO.cleanup()
@@ -21,7 +22,7 @@ class ServoController():
             if (self.repeat == True):
                 while self.repeat:
                     self.runServo()
-                    time.sleep(5)
+                    time.sleep(self.repeat_delay)
             else:
                 self.runServo()
         except Exception as e:

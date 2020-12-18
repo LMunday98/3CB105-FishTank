@@ -14,9 +14,10 @@ from servoController import ServoController
 
 dev = False
 repeat = True
+repeat_delay = 1
 
-servo = ServoController(dev, repeat)
-tempSensor = TempController(dev, repeat)
+servo = ServoController(dev, repeat, repeat_delay)
+tempSensor = TempController(dev, repeat, repeat_delay)
 #pumpController = PumpController()
 
 # defs
