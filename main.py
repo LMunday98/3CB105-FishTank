@@ -22,7 +22,7 @@ def finishProgram():
     sys.exit()
 
 # program setup
-dev = True
+dev = False
 repeat = False
 repeat_delay = 3
 timeC = TimeController()

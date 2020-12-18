@@ -2,8 +2,6 @@
 import RPi.GPIO as GPIO
 import time
 
-from datetime import time
-
 class ServoController():
 
     def __init__(self, _process_paramaters, _opTime):
@@ -57,6 +55,7 @@ class ServoController():
 
     def finish(self):
         print("Servo: finish")
+        self.moveServo(0)
         self.repeat = False
         self.servo1.stop()
         GPIO.cleanup()
