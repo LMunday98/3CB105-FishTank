@@ -2,6 +2,8 @@
 import RPi.GPIO as GPIO
 import time
 
+from datetime import time
+
 class ServoController():
 
     def __init__(self, _process_paramaters):
@@ -9,6 +11,10 @@ class ServoController():
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
+        self.timeC = _process_paramaters[3]
+
+        self.operate_start_time = time(10,30)
+        self.operate_end_time = time(21,30)
 
         GPIO.setwarnings(False)
         GPIO.cleanup()
@@ -25,14 +31,19 @@ class ServoController():
                     self.runServo()
                     time.sleep(self.repeat_delay)
             else:
-                self.runServo()
+                self.checkTime()
         except Exception as e:
-            print("error servo")
+            print("Servo: error")
+
+    def checkTime(self):
+        is_between_time = self.timeC.is_time_between(self.operate_start_time, self.operate_end_time)
+        if (is_between_time):
+            self.runServo()
 
     def runServo(self):
         print("Servo: run")
         if (self.dev == True):
-            print("servo dev movement")
+            print("Servo: dev movement")
         else:
             # flip
             self.moveServo(180)

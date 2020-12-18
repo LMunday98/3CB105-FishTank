@@ -9,6 +9,7 @@ class TempController():
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
+        self.timeC = _process_paramaters[3]
 
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')
@@ -27,7 +28,7 @@ class TempController():
             else:
                 print(self.read_temp())
         except Exception as e:
-            print("error temp")
+            print("Temp: error")
 
     def read_temp_raw(self):
         f = open(self.device_file, 'r')
