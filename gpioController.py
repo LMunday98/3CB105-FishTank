@@ -13,9 +13,11 @@ class GpioController():
 
     def setup_gpio_in(self, gpio_pin):
         gpio_in = GPIO.setup(gpio_pin, GPIO.IN)
-        gpio_in = GPIO.input(gpio_pin)
         self.gpio_in_array.append(gpio_in)
-        return gpio_in
+        #return gpio_in
+
+    def gpio_get_input(self, gpio_pin):
+        return GPIO.input(gpio_pin)
 
     def setup_gpio_out(self, gpio_pin, freq=None):
         gpio_out = GPIO.setup(gpio_pin, GPIO.OUT)
