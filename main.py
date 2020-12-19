@@ -29,20 +29,24 @@ gpioC = GpioController()
 
 # program setup
 dev = False
-repeat = True
+repeat = False
 repeat_delay = 3
 process_paramaters = [dev, repeat, repeat_delay, timeC, gpioC]
 
 # servo operation paramters
-gpio_pin = 11
-freq = 50
+servo_gpio_pin = 11
+servo_freq = 50
 servo_operation_times = [time(10,30), time(21,30)]
-servo_operation_params = [gpio_pin, freq, servo_operation_times]
+servo_operation_params = [servo_gpio_pin, servo_freq, servo_operation_times]
+
+# pump operation paramters
+pump_gpio_pin = 8
+pump_operation_params = [pump_gpio_pin]
 
 # setup process controllers
 controller_servo = ServoController(process_paramaters, servo_operation_params)
 controller_temperature = TempController(process_paramaters)
-contorller_pump = PumpController(process_paramaters)
+contorller_pump = PumpController(process_paramaters, pump_operation_params)
 
 # add controllers to array
 controller_array = []

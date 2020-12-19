@@ -10,6 +10,7 @@ class ServoController():
         self.repeat_delay = _process_paramaters[2]
         self.timeC = _process_paramaters[3]
         gpioC = _process_paramaters[4]
+
         self.opTime = _servo_operation_params[2]
 
         self.servo1 = gpioC.setup_gpio_out(_servo_operation_params[0], _servo_operation_params[1])
