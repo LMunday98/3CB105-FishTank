@@ -11,7 +11,7 @@ from pumpController import PumpController
 from servoController import ServoController
 
 # defs
-def finishProgram():
+def finish_threads():
     if (repeat == True):
         try:
             input()
@@ -19,7 +19,6 @@ def finishProgram():
             print("*Force Quit*")
 
     thread_controller.finish_threads()
-    sys.exit()
 
 # program setup
 dev = False
@@ -45,5 +44,8 @@ controller_array.append(tempSensor)
 thread_controller = ThreadController(controller_array, repeat)
 thread_controller.start()
 
-# finish and clean up processes
-finishProgram()
+# finish and clean up threads
+finish_threads()
+
+# exit program
+sys.exit()
