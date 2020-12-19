@@ -6,6 +6,8 @@ from datetime import datetime, time
 
 from threadController import ThreadController
 from timeController import TimeController
+from gpioController import GpioController
+
 from tempController import TempController
 from pumpController import PumpController
 from servoController import ServoController
@@ -19,26 +21,34 @@ def finish_threads():
             print("*Force Quit*")
 
     thread_controller.finish_threads()
+    gpioC.finish()
+
+# setup operation controllers
+timeC = TimeController()
+gpioC = GpioController()
 
 # program setup
 dev = False
-repeat = False
+repeat = True
 repeat_delay = 3
-timeC = TimeController()
-process_paramaters = [dev, repeat, repeat_delay, timeC]
+process_paramaters = [dev, repeat, repeat_delay, timeC, gpioC]
 
-# operation times
+# servo operation paramters
+gpio_pin = 11
+freq = 50
 servo_operation_times = [time(10,30), time(21,30)]
+servo_operation_params = [gpio_pin, freq, servo_operation_times]
 
-# setup controllers
-servo = ServoController(process_paramaters, servo_operation_times)
-tempSensor = TempController(process_paramaters)
-pumpController = PumpController()
+# setup process controllers
+controller_servo = ServoController(process_paramaters, servo_operation_params)
+controller_temperature = TempController(process_paramaters)
+contorller_pump = PumpController(process_paramaters)
 
 # add controllers to array
 controller_array = []
-controller_array.append(servo)
-controller_array.append(tempSensor)
+controller_array.append(controller_servo)
+controller_array.append(controller_temperature)
+controller_array.append(contorller_pump)
 
 # setup threading
 thread_controller = ThreadController(controller_array, repeat)

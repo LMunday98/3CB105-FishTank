@@ -9,7 +9,6 @@ class TempController():
         self.dev = _process_paramaters[0]
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
-        self.timeC = _process_paramaters[3]
 
         os.system('modprobe w1-gpio')
         os.system('modprobe w1-therm')

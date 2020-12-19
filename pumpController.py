@@ -2,16 +2,17 @@ import os
 
 class PumpController():
 
-    def __init__(self):
+    def __init__(self, _process_paramaters):
         print("Pump: create")
+        self.dev = _process_paramaters[0]
+        self.repeat = _process_paramaters[1]
+        self.repeat_delay = _process_paramaters[2]
+        gpioC = _process_paramaters[4]
 
-    def pump_off(self):
-        print("off")
-        try:
-            subprocess.call( "echo '1-1' |sudo tee /sys/bus/usb/drivers/usb/unbind", shell=True)
-        except Exception:
-            print("problem")
-            pass
+        self.lvlSensor = gpioC.setup_gpio_in(8)
 
-    def pump_on(self):
-        print("on")
+    def start(self):
+        print("Pump: start")
+
+    def finish(self):
+        print("Pump: finish")
