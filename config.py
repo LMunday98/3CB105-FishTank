@@ -13,15 +13,21 @@ class Config():
     def program_setup(self):
         # program run settings
         dev = False
-        repeat = True
+        repeat = False
         repeat_delay = 3
-        return [dev, repeat, repeat_delay, TimeController(), GpioController([self.servo_operation_params, self.pump_operation_params])]
+        return [dev, repeat, repeat_delay, TimeController(), self.gpio_setup()]
+
+    def gpio_setup(self):
+        gpioC = GpioController()
+        gpioC.setup_gpio_out(self.servo_operation_params[0], self.servo_operation_params[1])
+        gpioC.setup_gpio_in(self.pump_operation_params[0])
+        return gpioC
 
     def servo_setup(self):
         # servo operation paramters
         servo_gpio_pin = 11
         servo_freq = 50
-        servo_operation_times = [time(10,30), time(21,30)]
+        servo_operation_times = [time(10,30), time(22,30)]
         return [servo_gpio_pin, servo_freq, servo_operation_times]
 
     def pump_setup(self):
