@@ -11,21 +11,8 @@ from tempController import TempController
 from pumpController import PumpController
 from servoController import ServoController
 
-# defs
-def finish_threads():
-    if (repeat == True):
-        try:
-            input()
-        except Exception as e:
-            print("*Force Quit*")
-
-    thread_controller.finish_threads()
-    gpioC.finish()
-
 # import config file
 config = Config()
-repeat = config.get_param_settings()[1]
-gpioC = config.get_param_settings()[4]
 
 # setup process controllers
 controller_servo = ServoController(config.get_param_settings(), config.get_param_servo())
@@ -39,11 +26,11 @@ controller_array.append(controller_temperature)
 controller_array.append(contorller_pump)
 
 # setup threading
-thread_controller = ThreadController(controller_array, repeat)
+thread_controller = ThreadController(controller_array, config.get_param_settings())
 thread_controller.start()
 
 # finish and clean up threads
-finish_threads()
+thread_controller.finish_threads()
 
 # exit program
 sys.exit()

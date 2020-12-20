@@ -3,13 +3,21 @@ import threading
 
 class ThreadController():
 
-    def __init__(self, _controller_array, _repeat):
+    def __init__(self, _controller_array, _process_paramaters):
         print("Thread Controller: create")
         self.controller_array = _controller_array
-        self.repeat = _repeat
+        self.repeat = _process_paramaters[1]
+        self.gpioC = _process_paramaters[4]
         self.threads = []
 
     def finish_threads(self):
+        if (self.repeat == True):
+            try:
+                input()
+            except Exception as e:
+                print("*Force Quit*")
+
+        self.gpioC.finish()
 
         for controller in self.controller_array:
             controller.finish()
