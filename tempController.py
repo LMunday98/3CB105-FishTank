@@ -17,10 +17,10 @@ class TempController():
         try:
             if (self.repeat == True):
                 while self.repeat:
-                    print(self.read_temp())
+                    self.read_temp()
                     time.sleep(self.repeat_delay)
             else:
-                print(self.read_temp())
+                self.read_temp()
         except Exception as e:
             print("Temp: error")
 

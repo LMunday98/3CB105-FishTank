@@ -47,7 +47,6 @@ class GpioController():
     def get_bus_input(self):
         lines = self.read_raw_bus_data()
         while lines[0].strip()[-3:] != 'YES':
-            time.sleep(0)
             lines = read_raw_bus_data()
         equals_pos = lines[1].find('t=')
         if equals_pos != -1:
