@@ -6,16 +6,16 @@ class Config():
 
     def __init__(self):
         print("Config: import")
-        self.process_paramaters = self.program_setup()
         self.servo_operation_params = self.servo_setup()
         self.pump_operation_params = self.pump_setup()
+        self.process_paramaters = self.program_setup()
 
     def program_setup(self):
         # program run settings
         dev = False
         repeat = True
         repeat_delay = 3
-        return [dev, repeat, repeat_delay, TimeController(), GpioController()]
+        return [dev, repeat, repeat_delay, TimeController(), GpioController([self.servo_operation_params, self.pump_operation_params])]
 
     def servo_setup(self):
         # servo operation paramters
