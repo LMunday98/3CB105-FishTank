@@ -24,13 +24,13 @@ def finish_threads():
 
 # import config file
 config = Config()
-repeat = config.get_param_process()[1]
-gpioC = config.get_param_process()[4]
+repeat = config.get_param_settings()[1]
+gpioC = config.get_param_settings()[4]
 
 # setup process controllers
-controller_servo = ServoController(config.get_param_process(), config.get_param_servo())
-controller_temperature = TempController(config.get_param_process())
-contorller_pump = PumpController(config.get_param_process(), config.get_param_pump())
+controller_servo = ServoController(config.get_param_settings(), config.get_param_servo())
+controller_temperature = TempController(config.get_param_settings())
+contorller_pump = PumpController(config.get_param_settings(), config.get_param_pump())
 
 # add controllers to array
 controller_array = []

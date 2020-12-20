@@ -7,29 +7,31 @@ from gpioController import GpioController
 class Config():
 
     def __init__(self):
-        print("Config: setup")
+        print("Config: import")
+        self.process_paramaters = self.program_setup()
+        self.servo_operation_params = self.servo_setup()
+        self.pump_operation_params = self.pump_setup()
 
-        # setup operation controllers
-        timeC = TimeController()
-        gpioC = GpioController()
-
-        # program setup
+    def program_setup(self):
+        # program run settings
         dev = False
         repeat = False
         repeat_delay = 3
-        self.process_paramaters = [dev, repeat, repeat_delay, timeC, gpioC]
+        return [dev, repeat, repeat_delay, TimeController(), GpioController()]
 
+    def servo_setup(self):
         # servo operation paramters
         servo_gpio_pin = 11
         servo_freq = 50
         servo_operation_times = [time(10,30), time(21,30)]
-        self.servo_operation_params = [servo_gpio_pin, servo_freq, servo_operation_times]
+        return [servo_gpio_pin, servo_freq, servo_operation_times]
 
+    def pump_setup(self):
         # pump operation paramters
         pump_gpio_pin = 8
-        self.pump_operation_params = [pump_gpio_pin]
+        return [pump_gpio_pin]
 
-    def get_param_process(self):
+    def get_param_settings(self):
         return self.process_paramaters
 
     def get_param_servo(self):
