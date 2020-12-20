@@ -1,5 +1,4 @@
 import time
-import RPi.GPIO as GPIO
 
 class PumpController():
 
@@ -17,7 +16,7 @@ class PumpController():
         try:
             if (self.repeat == True):
                 while self.repeat:
-                    print(self.check_water())
+                    self.check_water()
                     time.sleep(self.repeat_delay)
             else:
                 self.check_water()
@@ -25,7 +24,8 @@ class PumpController():
             print("Pump: error")
 
     def check_water(self):
-        return GPIO.input(8)
+        is_water = self.gpioC.get_sensor_input(self.pin)
+        print(is_water)
 
     def finish(self):
         print("Pump: finish")

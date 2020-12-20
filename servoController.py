@@ -9,17 +9,12 @@ class ServoController():
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
         self.timeC = _process_paramaters[3]
-        self.gpioC = _process_paramaters[4]
 
-        self.pin = _servo_operation_params[0]
-        self.freq = _servo_operation_params[1]
-        self.opTime = _servo_operation_params[2]
+        self.servo =_servo_operation_params[0]
+        self.opTime = _servo_operation_params[1]
 
     def start(self):
         print("Servo: start")
-
-        self.servo1 = self.gpioC.setup_gpio_out(self.pin, self.freq)
-
         try:
             if (self.repeat == True):
                 while self.repeat:
@@ -61,6 +56,6 @@ class ServoController():
         return (2+(angle/18))
 
     def moveServo(self, angleToMove):
-        self.servo1.ChangeDutyCycle(self.calcMoveAngle(angleToMove))
+        self.servo.ChangeDutyCycle(self.calcMoveAngle(angleToMove))
         time.sleep(0.1)
-        self.servo1.ChangeDutyCycle(0)
+        self.servo.ChangeDutyCycle(0)

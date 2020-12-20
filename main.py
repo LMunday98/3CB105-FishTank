@@ -15,9 +15,9 @@ from servoController import ServoController
 config = Config()
 
 # setup process controllers
-controller_servo = ServoController(config.get_param_settings(), config.get_param_servo())
-controller_temperature = TempController(config.get_param_settings())
-contorller_pump = PumpController(config.get_param_settings(), config.get_param_pump())
+controller_servo = ServoController(config.get_program_settings(), config.get_param_servo())
+controller_temperature = TempController(config.get_program_settings())
+contorller_pump = PumpController(config.get_program_settings(), config.get_param_pump())
 
 # add controllers to array
 controller_array = []
@@ -26,7 +26,7 @@ controller_array.append(controller_temperature)
 controller_array.append(contorller_pump)
 
 # setup threading
-thread_controller = ThreadController(controller_array, config.get_param_settings())
+thread_controller = ThreadController(controller_array, config.get_program_settings())
 thread_controller.start()
 
 # finish and clean up threads
