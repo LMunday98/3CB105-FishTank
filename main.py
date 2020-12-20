@@ -1,12 +1,11 @@
-#sudo python Documents/3CB105-FishTank/main.py
+# sudo python Documents/3CB105-FishTank/main.py
+# cd Documents/3CB105-FishTank
+# sudo python main.py
 
 import sys
-import time
-from datetime import datetime, time
 
+from config import Config
 from threadController import ThreadController
-from timeController import TimeController
-from gpioController import GpioController
 
 from tempController import TempController
 from pumpController import PumpController
@@ -23,30 +22,15 @@ def finish_threads():
     thread_controller.finish_threads()
     gpioC.finish()
 
-# setup operation controllers
-timeC = TimeController()
-gpioC = GpioController()
-
-# program setup
-dev = False
-repeat = False
-repeat_delay = 3
-process_paramaters = [dev, repeat, repeat_delay, timeC, gpioC]
-
-# servo operation paramters
-servo_gpio_pin = 11
-servo_freq = 50
-servo_operation_times = [time(10,30), time(21,30)]
-servo_operation_params = [servo_gpio_pin, servo_freq, servo_operation_times]
-
-# pump operation paramters
-pump_gpio_pin = 8
-pump_operation_params = [pump_gpio_pin]
+# import config file
+config = Config()
+repeat = config.get_param_process()[1]
+gpioC = config.get_param_process()[4]
 
 # setup process controllers
-controller_servo = ServoController(process_paramaters, servo_operation_params)
-controller_temperature = TempController(process_paramaters)
-contorller_pump = PumpController(process_paramaters, pump_operation_params)
+controller_servo = ServoController(config.get_param_process(), config.get_param_servo())
+controller_temperature = TempController(config.get_param_process())
+contorller_pump = PumpController(config.get_param_process(), config.get_param_pump())
 
 # add controllers to array
 controller_array = []
