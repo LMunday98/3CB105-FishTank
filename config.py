@@ -1,6 +1,4 @@
 from datetime import datetime, time
-
-
 from timeController import TimeController
 from gpioController import GpioController
 

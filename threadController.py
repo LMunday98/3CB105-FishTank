@@ -17,6 +17,7 @@ class ThreadController():
             except Exception as e:
                 print("*Force Quit*")
 
+        print("Threading: finish")
         self.gpioC.finish()
 
         for controller in self.controller_array:

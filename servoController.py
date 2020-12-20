@@ -9,15 +9,17 @@ class ServoController():
         self.repeat = _process_paramaters[1]
         self.repeat_delay = _process_paramaters[2]
         self.timeC = _process_paramaters[3]
-        gpioC = _process_paramaters[4]
+        self.gpioC = _process_paramaters[4]
 
+        self.pin = _servo_operation_params[0]
+        self.freq = _servo_operation_params[1]
         self.opTime = _servo_operation_params[2]
-
-        self.servo1 = gpioC.setup_gpio_out(_servo_operation_params[0], _servo_operation_params[1])
-        self.servo1.start(0)
 
     def start(self):
         print("Servo: start")
+
+        self.servo1 = self.gpioC.setup_gpio_out(self.pin, self.freq)
+
         try:
             if (self.repeat == True):
                 while self.repeat:
