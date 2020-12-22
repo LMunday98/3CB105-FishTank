@@ -2,8 +2,8 @@ import sys
 from datetime import datetime, time
 
 #from controllers.timeController import TimeController
-from package.timeController import *
-from package.gpioController import GpioController
+from package_controllers.timeController import *
+from package_controllers.gpioController import GpioController
 
 class Config():
 

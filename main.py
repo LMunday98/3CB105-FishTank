@@ -6,11 +6,11 @@ import sys
 sys.dont_write_bytecode = True
 
 from config import Config
-from package.threadController import ThreadController
+from package_controllers.threadController import ThreadController
 
-from package.tempController import TempController
-from package.pumpController import PumpController
-from package.servoController import ServoController
+from package_controllers.tempController import TempController
+from package_controllers.pumpController import PumpController
+from package_controllers.servoController import ServoController
 
 # import config file
 config = Config()
