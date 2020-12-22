@@ -3,6 +3,7 @@
 # sudo python main.py
 
 import sys
+sys.dont_write_bytecode = True
 
 from config import Config
 from package.threadController import ThreadController
