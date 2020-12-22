@@ -16,7 +16,7 @@ class Config():
     def program_setup(self):
         # program run settings
         dev = False
-        repeat = True
+        repeat = False
         repeat_delay = 3
         return [dev, repeat, repeat_delay, TimeController(), GpioController()]
 

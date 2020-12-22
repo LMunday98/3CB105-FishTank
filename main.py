@@ -5,6 +5,7 @@
 import sys
 sys.dont_write_bytecode = True
 
+from db import Db
 from config import Config
 from package_controllers.threadController import ThreadController
 
@@ -32,6 +33,11 @@ thread_controller.start()
 
 # finish and clean up threads
 thread_controller.finish_threads()
+
+# insert data to mysql database
+data = [0, 27.756, 1, '2020-12-23', '22:30:00']
+db = Db()
+db.insert_data(data)
 
 # exit program
 sys.exit()
