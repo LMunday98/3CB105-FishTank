@@ -35,7 +35,7 @@ thread_controller.start()
 thread_controller.finish_threads()
 
 # insert data to mysql database
-data = [0, 27.756, 1, '2020-12-23', '22:30:00']
+data = [0, 27.756, 1, config.get_program_settings()[3].get_current_date(), config.get_program_settings()[3].get_current_time()]
 db = Db()
 db.insert_data(data)
 

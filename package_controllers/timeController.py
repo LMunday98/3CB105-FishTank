@@ -12,3 +12,9 @@ class TimeController():
             return check_time >= begin_time and check_time <= end_time
         else: # crosses midnight
             return check_time >= begin_time or check_time <= end_time
+
+    def get_current_time(self):
+        return datetime.utcnow().time()
+
+    def get_current_date(self):
+        return datetime.today().strftime('%Y-%m-%d')
