@@ -35,7 +35,8 @@ thread_controller.start()
 thread_controller.finish_threads()
 
 # insert data to mysql database
-data = [0, 27.756, 1, config.get_program_settings()[3].get_current_date(), config.get_program_settings()[3].get_current_time()]
+timeC = config.get_program_settings()[3]
+data = [0, controller_temperature.get_sensor_reading(), contorller_pump.get_sensor_reading(), timeC.get_current_date(), timeC.get_current_time()]
 db = Db()
 db.insert_data(data)
 

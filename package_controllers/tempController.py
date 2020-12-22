@@ -10,7 +10,7 @@ class TempController():
         self.repeat_delay = _process_paramaters[2]
         self.gpioC = _process_paramaters[4]
 
-
+        self.sensor_reading = 0
 
     def start(self):
         print("Temp: start")
@@ -27,8 +27,12 @@ class TempController():
     def read_temp(self):
         print("Temp: run")
         temp = self.gpioC.get_bus_input()
+        self.sensor_reading = temp
         print(temp)
 
     def finish(self):
         print("Temp: finish")
         repeat = False
+
+    def get_sensor_reading(self):
+        return self.sensor_reading

@@ -11,6 +11,8 @@ class PumpController():
 
         self.pin = _pump_operation_params[0]
 
+        self.sensor_reading = 0
+
     def start(self):
         print("Pump: start")
         try:
@@ -25,8 +27,12 @@ class PumpController():
 
     def check_water(self):
         is_water = self.gpioC.get_sensor_input(self.pin)
+        self.sensor_reading = is_water
         print(is_water)
 
     def finish(self):
         print("Pump: finish")
         self.repeat = False
+
+    def get_sensor_reading(self):
+        return self.sensor_reading
