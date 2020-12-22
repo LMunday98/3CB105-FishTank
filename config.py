@@ -1,6 +1,9 @@
+import sys
 from datetime import datetime, time
-from timeController import TimeController
-from gpioController import GpioController
+
+#from controllers.timeController import TimeController
+from package.timeController import *
+from package.gpioController import GpioController
 
 class Config():
 

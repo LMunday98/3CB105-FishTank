@@ -5,11 +5,11 @@
 import sys
 
 from config import Config
-from threadController import ThreadController
+from package.threadController import ThreadController
 
-from tempController import TempController
-from pumpController import PumpController
-from servoController import ServoController
+from package.tempController import TempController
+from package.pumpController import PumpController
+from package.servoController import ServoController
 
 # import config file
 config = Config()

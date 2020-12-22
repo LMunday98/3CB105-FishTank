@@ -6,14 +6,12 @@ class GpioController():
 
     def __init__(self):
         print("GPIO: create")
-        #GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         self.gpio_out_array = []
         self.device_file = self.setup_bus_slave()
 
     def setup_gpio_in(self, gpio_pin):
         gpio_in = GPIO.setup(gpio_pin, GPIO.IN)
-        #return gpio_in
 
     def get_sensor_input(self, gpio_pin):
         return GPIO.input(gpio_pin)
