@@ -42,7 +42,9 @@ controller_rpi.get_readings()
 
 # insert data to mysql database
 timeC = config.get_program_settings()[3]
-data = [0, controller_temperature.get_sensor_reading(), contorller_pump.get_sensor_reading(), controller_rpi.get_sensor_reading()[1], controller_rpi.get_sensor_reading()[1], controller_rpi.get_sensor_reading()[2], timeC.get_current_date(), timeC.get_current_time()]
+rpiC = controller_rpi.get_sensor_reading()
+print (rpiC[0], rpiC[1], rpiC[2])
+data = [0, controller_temperature.get_sensor_reading(), contorller_pump.get_sensor_reading(), rpiC[0], rpiC[1], rpiC[2], timeC.get_current_date(), timeC.get_current_time()]
 db = Db()
 db.insert_data(data)
 

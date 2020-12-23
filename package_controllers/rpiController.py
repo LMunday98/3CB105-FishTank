@@ -1,6 +1,7 @@
 import time
 from gpiozero import CPUTemperature
 import RPi.GPIO as GPIO
+import psutil
 
 class RpiController():
 
@@ -27,11 +28,17 @@ class RpiController():
 
     def get_readings(self):
         print("Rpi: run")
-        rpi_cpu = 1
-        rpi_mem = 1
+        rpi_cpu = self.get_cpu_usage()
+        rpi_mem = self.get_mem_usage()
+        rpi_tem = self.get_cpu_temp()
 
-        self.sensor_reading = [rpi_cpu, rpi_mem, get_cpu_temp()]
-        #print(temp)
+        self.sensor_reading = [rpi_cpu, rpi_mem, rpi_tem, rpi_cpu]
+
+    def get_cpu_usage(self):
+        return psutil.cpu_percent()
+
+    def get_mem_usage(self):
+        return psutil.virtual_memory().percent
 
     def get_cpu_temp(self):
         GPIO.setmode(GPIO.BCM)
