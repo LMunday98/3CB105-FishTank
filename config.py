@@ -24,7 +24,7 @@ class Config():
         # servo operation paramters
         servo_gpio_pin = 11
         servo_freq = 50
-        servo_operation_times = [time(10,30), time(22,30)]
+        servo_operation_times = [time(17,25), time(17,35)]
         servo = self.process_paramaters[4].setup_gpio_out(servo_gpio_pin, servo_freq)
         return [servo, servo_operation_times]
 

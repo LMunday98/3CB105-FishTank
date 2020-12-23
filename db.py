@@ -8,8 +8,8 @@ class Db():
         self.conn = mysql.connector.connect(
             host='192.168.0.185',
             database='3CB105',
-            user='remote',
-            password='remote'
+            user='admin_remote',
+            password='admin'
         )
 
         #Creating a cursor object using the cursor() method
@@ -18,7 +18,7 @@ class Db():
     def insert_data(self, data):
         print("Db: insert")
         # Preparing SQL query to INSERT a record into the database.
-        sql = """INSERT INTO Data (log_id, water_temperature, water_level_max, date, time) VALUES  (%s, %s, %s, %s, %s)"""
+        sql = """INSERT INTO Data (log_id, water_temperature, water_level_max, rpi_cpu, rpi_mem, rpi_temp, log_date, log_time) VALUES  (%s, %s, %s, %s, %s, %s, %s, %s)"""
         try:
             # Executing the SQL command
             self.cursor.execute(sql, data)
